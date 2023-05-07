@@ -24,8 +24,8 @@ const ProjectbrucellaController = {
     try {
       pre = await Projectbrucella.find({
         name: req.body.name,
-       sampleType: req.body.sampleType,
-        $and:[{createdAt:{$gte:d1}},{createdAt:{$lte:d2}}]})
+        RequiredAnalysis: req.body.RequiredAnalysis,
+        $and:[{date:{$gte:d1}},{date:{$lte:d2}}]})
      
     } catch (error) {
       return next(error);
@@ -36,20 +36,20 @@ const ProjectbrucellaController = {
   },
 
   async addProjectbrucella(req, res, next) {
-    const productsSchema = Joi.object({
-      name: Joi.string().required(),
-      workOder: Joi.string().required(),
-      noofSample: Joi.string().required(),
-      // requiredTest: Joi.string().required(),
-      sampleType: Joi.string().required(),
-       date: Joi.string().required(),
-      RequiredAnalysis: Joi.string().required(),
-      count:  Joi.number().required(),
-    });
-    const { error } = productsSchema.validate(req.body);
-    if (error) {
-      return next(error);
-    }
+    // const productsSchema = Joi.object({
+    //   name: Joi.string().required(),
+    //   workOder: Joi.string().required(),
+    //   noofSample: Joi.string().required(),
+    //   // requiredTest: Joi.string().required(),
+    //   sampleType: Joi.string().required(),
+    //    date: Joi.string().required(),
+    //   RequiredAnalysis: Joi.string().required(),
+    //   count:  Joi.number().required(),
+    // });
+    // const { error } = productsSchema.validate(req.body);
+    // if (error) {
+    //   return next(error);
+    // }
     const { name, workOder, noofSample, requiredTest, sampleType, date, RequiredAnalysis,count} =
       req.body;
 

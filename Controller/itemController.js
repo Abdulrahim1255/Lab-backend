@@ -25,8 +25,8 @@ const itemController = {
     try {
       pre = await Product.find({
         name: req.body.name,
-       sampleType: req.body.sampleType,
-        $and:[{createdAt:{$gte:d1}},{createdAt:{$lte:d2}}]})
+        RequiredAnalysis: req.body.RequiredAnalysis,
+        $and:[{date:{$gte:d1}},{date:{$lte:d2}}]})
      
     } catch (error) {
       return next(error);
@@ -38,19 +38,19 @@ const itemController = {
   },
 
   async add(req, res, next) {
-    const productsSchema = Joi.object({
-      name: Joi.string().required(),
-      workOder: Joi.string().required(),
-      noofSample: Joi.string().required(),
-      sampleType: Joi.string().required(),
-      date: Joi.date().required(),
-      RequiredAnalysis:Joi.string().required(),
-      count:  Joi.required(),
-    });
-    const { error } = productsSchema.validate(req.body);
-    if (error) {
-      return next(error);
-    }
+    // const productsSchema = Joi.object({
+    //   name: Joi.string().required(),
+    //   workOder: Joi.string().required(),
+    //   noofSample: Joi.string().required(),
+    //   sampleType: Joi.string().required(),
+    //   date: Joi.date().required(),
+    //   RequiredAnalysis:Joi.string().required(),
+    //   count:  Joi.required(),
+    // });
+    // const { error } = productsSchema.validate(req.body);
+    // if (error) {
+    //   return next(error);
+    // }
     const { name, workOder, noofSample, requiredTest, sampleType, date,RequiredAnalysis,count } =
       req.body;
 

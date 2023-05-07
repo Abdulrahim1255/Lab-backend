@@ -21,12 +21,13 @@ const MainController = {
    
     let d1 = date.parse(req.body.from, "YYYY/MM/DD");
     let d2 = date.parse(req.body.to, "YYYY/MM/DD");
-  
+   
     try {
       pre = await Main.find({
         name: req.body.name,
-       sampleType: req.body.sampleType,
-        $and:[{createdAt:{$gte:d1}},{createdAt:{$lte:d2}}]})
+        RequiredAnalysis: req.body.RequiredAnalysis,
+       
+        $and:[{date:{$gte:d1}},{date:{$lte:d2}}]})
      
     } catch (error) {
       return next(error);
@@ -38,21 +39,21 @@ const MainController = {
   },
 
   async addMain(req, res, next) {
-    const productsSchema = Joi.object({
-      name: Joi.string().required(),
-      workOder: Joi.string().required(),
-      noofSample: Joi.string().required(),
-      sampleType: Joi.string().required(),
-      date: Joi.date().required(),
-      RequiredAnalysis:Joi.string().required(),
-      count:  Joi.required(),
-      count:  Joi.required(),
-    });
-    const { error } = productsSchema.validate(req.body);
-    if (error) {
-      return next(error);
-    }
-    const { name, workOder, noofSample, requiredTest, sampleType, date,RequiredAnalysis,count } =
+    // const productsSchema = Joi.object({
+    //   name: Joi.string().required(),
+    //   workOder: Joi.string().required(),
+    //   noofSample: Joi.string().required(),
+    //   sampleType: Joi.string().required(),
+    //   date: Joi.date().required(),
+    //   RequiredAnalysis:Joi.string().required(),
+    //   count:  Joi.required(),
+    //   excel: Joi.array
+    // });
+    // const { error } = productsSchema.validate(req.body);
+    // if (error) {
+    //   return next(error);
+    // }
+    const { name, workOder, noofSample, requiredTest, sampleType, date,RequiredAnalysis,count ,excel} =
       req.body;
 
     let product;
@@ -65,6 +66,7 @@ const MainController = {
         date,
         RequiredAnalysis,
         count,
+        // excel
       });
 
       if (!product) {
@@ -89,7 +91,7 @@ const MainController = {
     // if (error) {
     //   return next(error);
     // }
-    const { name, workOder, noofSample, requiredTest, sampleType, date ,RequiredAnalysis,count} =
+    const { name, workOder, noofSample, requiredTest, sampleType, date ,RequiredAnalysis,count,excel} =
 
       req.body;
  console.log(req.body,'reqbody')
@@ -106,6 +108,7 @@ const MainController = {
           date,
           count,
           RequiredAnalysis,
+          // excel
         },{new: true}
       );
 console.log(product,'product')
